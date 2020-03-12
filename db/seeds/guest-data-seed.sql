@@ -6,10 +6,10 @@ TRUNCATE
   projects
   RESTART IDENTITY CASCADE;
 
-INSERT INTO users (name, nickname, password)
+INSERT INTO users (user_name, nickname, password)
 VALUES
-  ('dunder', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m'), 
-  ('admin', 'admin', '$2a$10$jHOVsme0Zr6SC6fQ/pX9lubfK/Ptc7O.lp.DKpHDuETeBTkf3nll.')
+  ('dunder@dunder.com', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m'), 
+  ('admin@admin.com', 'admin', '$2a$10$jHOVsme0Zr6SC6fQ/pX9lubfK/Ptc7O.lp.DKpHDuETeBTkf3nll.');
 
 INSERT INTO projects (title, content, user_id)
 VALUES
