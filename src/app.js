@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config');
 const app = express();
 const projectsRouter = require('./projects/projects-router');
 const tasksRouter = require('./tasks/tasks-router');
+const authRouter = require('./auth/auth-router');
 
 const morganOpt = 
 (NODE_ENV === 'production') ? 'tiny' : 'common';
@@ -26,8 +27,10 @@ app.get('/', (req, res) => {
     .send('Server is up');
 });
 
+app.use('/api/auth', authRouter);
 app.use('/api/projects', projectsRouter);
 app.use('/api/tasks', tasksRouter);
+
 errorHandler = (err, req, res, next) => {
   let response;
   if (NODE_ENV === 'production') {

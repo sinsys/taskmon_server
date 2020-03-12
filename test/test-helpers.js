@@ -28,13 +28,13 @@ makeUsersArray = () => {
   return [
     {
       id: 1,
-      name: 'test-user-1',
+      user_name: 'test-user-1',
       nickname: 'TU1',
       password: 'password'
     },
     {
       id: 2,
-      name: 'test-user-2',
+      user_name: 'test-user-2',
       nickname: 'TU2',
       password: 'password'
     }

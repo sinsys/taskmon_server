@@ -237,12 +237,12 @@ describe(`Projects Endpoints`, () => {
             .expect(204)
             .then(()=> {
               // We verify that we get a 404 when querying the project
-              supertest(app)
-                .get(`/api/project/${projectId}`)
-                .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-                .expect(404, {
-                  error: `Project doesn't exist`
-                })
+              return (
+                supertest(app)
+                  .get(`/api/project/${projectId}`)
+                  .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+                  .expect(404)
+              );
             })
         );
       });

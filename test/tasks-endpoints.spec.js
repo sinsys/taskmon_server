@@ -236,12 +236,12 @@ describe(`Tasks Endpoints`, () => {
             .expect(204)
             .then(()=> {
               // We verify that we get a 404 when querying the task
-              supertest(app)
-                .get(`/api/tasks/${taskId}`)
-                .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-                .expect(404, {
-                  error: `Task doesn't exist`
-                })
+              return (
+                supertest(app)
+                  .get(`/api/tasks/${taskId}`)
+                  .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
+                  .expect(404)
+              );
             })
         );
       });

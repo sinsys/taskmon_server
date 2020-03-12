@@ -1,11 +1,20 @@
+const bcrypt = require('bcryptjs');
+
 const AuthService = {
 
   // Get the user's information from the DB
-  getUser: (db, name) => {
+  getUser: (db, user_name) => {
     return (
       db('users')
-        .where({ name })
+        .where({ user_name })
         .first()
+    );
+  },
+
+  // Compare hashed password
+  comparePasswords: (password, hash) => {
+    return (
+      bcrypt.compare(password, hash)
     );
   },
 
