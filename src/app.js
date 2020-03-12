@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -6,22 +5,29 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
 const app = express();
+const projectsRouter = require('./projects/projects-router');
+const tasksRouter = require('./tasks/tasks-router');
 
-const morganOpt =
-  ( NODE_ENV === 'production' )
-    ? 'tiny'
-    : 'common';
+const morganOpt = 
+(NODE_ENV === 'production') ? 'tiny' : 'common';
 
 app.use(
-  morgan(morganOpt),
-  helmet(),
-  cors()
+  morgan(
+    morganOpt,
+    { skip: () => NODE_ENV === 'test' }
+  ),
+  cors(),
+  helmet()
 );
 
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+  res
+    .status(200)
+    .send('Server is up');
 });
 
+app.use('/api/projects', projectsRouter);
+app.use('/api/tasks', tasksRouter);
 errorHandler = (err, req, res, next) => {
   let response;
   if (NODE_ENV === 'production') {

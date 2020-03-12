@@ -8,8 +8,8 @@ TRUNCATE
 
 INSERT INTO users (name, nickname, password)
 VALUES
-  ('admin', 'AdMiN', 'test'),
-  ('test', 'tEsTeR', 'test');
+  ('dunder', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m'), 
+  ('admin', 'admin', '$2a$10$jHOVsme0Zr6SC6fQ/pX9lubfK/Ptc7O.lp.DKpHDuETeBTkf3nll.')
 
 INSERT INTO projects (title, content, user_id)
 VALUES
