@@ -1,4 +1,6 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 const AuthService = {
 
@@ -18,6 +20,33 @@ const AuthService = {
     );
   },
 
+  // Create a JWT for the user
+  createJwt: (subject, payload) => {
+    return (
+      jwt.sign(
+        payload, 
+        config.JWT_SECRET,
+        {
+          subject,
+          algorithm: 'HS256'
+        }
+      )
+    );
+  },
+
+  // Verify JWT token
+  verifyJwt: (token) => {
+    return (
+      jwt.verify(
+        token,
+        config.JWT_SECRET,
+        {
+          algorithms: ['HS256']
+        }
+      )
+    );
+  },
+  
   // Convert their token back into credentials
   parseBasicToken: (token) => {
     return (

@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // Truncate all tables and restart identities for database
 cleanTables = (db) => {
@@ -212,9 +213,17 @@ makeFixtures = () => {
 };
 
 // Creates our authorization header for testing
-makeAuthHeader = (user) => {
-  const token = Buffer.from(`${user.name}:${user.password}`).toString('base64');
-  return `basic ${token}`;
+makeAuthHeader = (user, secret = process.env.JWT_SECRET) => {
+  // const token = Buffer.from(`${user.name}:${user.password}`).toString('base64');
+  const token = jwt.sign(
+    { user_id: user.id },
+    secret,
+    {
+      subject: user.user_name,
+      algorithm: 'HS256'
+    }
+  );
+  return `Bearer ${token}`;
 };
 
 // Export our helper functions

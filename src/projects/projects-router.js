@@ -1,7 +1,7 @@
 const { Router, json } = require('express');
 const path = require('path')
 const ProjectsService = require('./projects-service');
-const { requireAuth } = require('../middleware/basic-auth');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const jsonBodyParser = json();
 

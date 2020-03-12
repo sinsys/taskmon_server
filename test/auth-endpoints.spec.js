@@ -1,8 +1,9 @@
 const app = require('../src/app');
 const knex = require('knex');
+const jwt = require('jsonwebtoken');
 const helpers = require('./test-helpers');
 
-describe.only(`Auth Endpoints`, () => {
+describe(`Auth Endpoints`, () => {
   let db;
 
   const { testUsers } = helpers.makeFixtures();
@@ -89,6 +90,30 @@ describe.only(`Auth Endpoints`, () => {
           )
       );
     });
-    
+
+    it(`responds 200 and JWT auth token using secret when valid credentials`, () => {
+      const validUserCreds = {
+        user_name: testUser.user_name,
+        password: testUser.password
+      };
+      const expectedToken = jwt.sign(
+        { user_id: testUser.id }, // Payload
+        process.env.JWT_SECRET,
+        {
+          subject: testUser.user_name,
+          algorithm: 'HS256'
+        }
+      );
+      return (
+        supertest(app)
+          .post(`/api/auth/login`)
+          .send(validUserCreds)
+          .expect(
+            200,
+            { authToken: expectedToken }
+          )
+      );
+    });
+
   });
 });
