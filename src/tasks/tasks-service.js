@@ -18,6 +18,7 @@ const TasksService = {
           'task.project_id'
         )
         .where('task.user_id', user_id)
+        .orderBy('task.date_due', 'asc')
     );
   },
 

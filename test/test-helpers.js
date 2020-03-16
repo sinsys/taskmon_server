@@ -8,7 +8,9 @@ cleanTables = (db) => {
       `TRUNCATE
         users,
         projects,
-        tasks
+        tasks,
+        hydration,
+        settings
       `
     )
     .then(() =>

@@ -11,24 +11,17 @@ VALUES
   ('dunder@dunder.com', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m'), 
   ('admin@admin.com', 'admin', '$2a$10$jHOVsme0Zr6SC6fQ/pX9lubfK/Ptc7O.lp.DKpHDuETeBTkf3nll.');
 
-INSERT INTO projects (title, content, user_id)
+INSERT INTO projects (title, content, user_id, date_due)
 VALUES
-  ('Project 1', 'Testing project description', 1),
-  ('Project 2', 'Testing project description 2', 2),
-  ('Project 3', 'Testing project description 3', 1);
+  ('Example Project', 'This is a sample project. It contains 3 tasks. It will be due soon!', 1, (NOW() + interval '2 days 2 hours 30 minutes')),
+  ('Long Due Date Project', 'This one only contains one task. It can be ignored for now.', 1, (NOW() + interval '21 days 19 hours 12 minutes'));
 
-INSERT INTO tasks (title, content, user_id, project_id)
+INSERT INTO tasks (title, content, user_id, project_id, date_due)
 VALUES
-  ('Task 1 Title', 'Lots of blank content', 1, 1),
-  ('Task 2 Title', 'Lots of blank content', 1, 1),
-  ('Task 3 Title', 'Lots of blank content', 1, 2),
-  ('Task 3 Title', 'Lots of blank content', 1, null),
-  ('Task 4 Title', 'Lots of blank content', 2, 1),
-  ('Task 5 Title', 'Lots of blank content', 2, 1),
-  ('Task 6 Title', 'Lots of blank content', 2, 2),
-  ('Task 7 Title', 'Lots of blank content', 2, 2),
-  ('Task 8 Title', 'Lots of blank content', 2, 2),
-  ('Task 9 Title', 'Lots of blank content', 2, null),
-  ('Task 10 Title', 'Lots of blank content', 2, null);
+  ('First Example Task Title', 'This is a description of a sample task.', 1, 1, (NOW() + interval '1 day 19 hours 21 minutes')),
+  ('Example Overdue Task', 'This is a task that is already overdue! We should finish it first!', 1, 1, NOW()),
+  ('Third Example Task Title', 'This is a description of a sample task. It is due when the project is due', 1, 1, (NOW() + interval '2 days 2 hours 30 minutes')),
+  ('Fourth Example Task Title', 'This is a description of a sample task. It is assigned to the long due-date project', 1, 2, (NOW() + interval '10 days 2 hours 11 minutes')),
+  ('Fifth Task Title', 'This task is not assigned to a project.', 1, null, (NOW() + interval '3 days 12 hours 10 minutes'));
 
 COMMIT;

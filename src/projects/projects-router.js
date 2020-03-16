@@ -19,6 +19,7 @@ projectsRouter
             ProjectsService.serializeProject(project)
           );
         });
+        
         return (
           res.json(serializedProjects)
         );
