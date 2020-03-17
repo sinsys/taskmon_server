@@ -37,6 +37,8 @@ describe(`Auth Endpoints`, () => {
           db,
           testUsers,
           [],
+          [],
+          [],
           []
         )
       );

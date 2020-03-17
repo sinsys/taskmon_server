@@ -18,9 +18,11 @@ cleanTables = (db) => {
         transaction.raw(`ALTER SEQUENCE users_id_seq minvalue 0 START WITH 1`),
         transaction.raw(`ALTER SEQUENCE projects_id_seq minvalue 0 START WITH 1`),
         transaction.raw(`ALTER SEQUENCE tasks_id_seq minvalue 0 START WITH 1`),
+        transaction.raw(`ALTER SEQUENCE hydration_id_seq minvalue 0 START WITH 1`),
         transaction.raw(`SELECT setval('users_id_seq', 0)`),
         transaction.raw(`SELECT setval('projects_id_seq', 0)`),
         transaction.raw(`SELECT setval('tasks_id_seq', 0)`),
+        transaction.raw(`SELECT setval('hydration_id_seq', 0)`)
       ])
     )
   );
@@ -123,9 +125,46 @@ makeTasksArray = (users, projects) => {
   ];
 };
 
-seedTables = (db, users, projects, tasks) => {
+// Create dummy settings for our tests
+makeSettingsArray = (users) => {
+  return [
+    {
+      id: 1,
+      user_id: users[0].id,
+      nickname: 'Test user',
+      hydration: true
+    }
+  ];
+};
 
+// Create dummy hydration entries for our tests
+makeHydrationsArray = (users) => {
+  return [
+    {
+      id: 1,
+      length: 7200000,
+      start_time: new Date('2020-01-22T16:28:32.615Z'),
+      end_time: new Date('2020-01-22T18:28:32.615Z'),
+      user_id: users[0].id
+    },
+    {
+      id: 1,
+      length: 7200000,
+      start_time: new Date('2020-01-22T16:28:32.615Z'),
+      end_time: new Date('2020-01-22T18:28:32.615Z'),
+      user_id: users[0].id
+    },
+    {
+      id: 1,
+      length: 7200000,
+      start_time: new Date('2020-01-22T16:28:32.615Z'),
+      end_time: new Date('2020-01-22T18:28:32.615Z'),
+      user_id: users[1].id
+    }
+  ]
+};
 
+seedTables = (db, users, projects, tasks, settings, hydration) => {
 
   return db.transaction(async trx => {
 
@@ -156,7 +195,22 @@ seedTables = (db, users, projects, tasks) => {
         [tasks[tasks.length - 1].id]
       );
     };
-    
+
+    if( settings.length > 0 ) {
+      await trx.into('settings').insert(settings);
+      await trx.raw(
+        `SELECT setval('settings_id_seq', ?)`,
+        [settings[settings.length - 1].id]
+      );
+    };    
+
+    if( hydration.length > 0 ) {
+      await trx.into('hydration').insert(hydration);
+      await trx.raw(
+        `SELECT setval('tasks_id_seq', ?)`,
+        [hydration[hydration.length - 1].id]
+      );
+    };
   });
 };
 
@@ -182,6 +236,25 @@ makeExpectedTask = (task) => {
     date_due: task.date_due.toISOString(),
     user_id: task.user_id,
     project_id: task.project_id
+  }
+};
+
+makeExpectedSetting = (setting) => {
+  return {
+    id: setting.id,
+    user_id: setting.user_id,
+    nickname: setting.nickname,
+    hydration: setting.hydration
+  }
+};
+
+makeExpectedHydration = (hydration) => {
+  return {
+    id: hydration.id,
+    length: hydration.length,
+    start_time: start_time.toISOString(),
+    end_time: end_time.toISOString(),
+    user_id: hydration.user_id
   }
 };
 
@@ -211,7 +284,9 @@ makeFixtures = () => {
   const testUsers = makeUsersArray();
   const testProjects = makeProjectsArray(testUsers);
   const testTasks = makeTasksArray(testUsers, testProjects);
-  return { testUsers, testProjects, testTasks };
+  const testSettings = makeSettingsArray(testUsers);
+  const testHydrations = makeHydrationsArray(testUsers);
+  return { testUsers, testProjects, testTasks, testSettings, testHydrations };
 };
 
 // Creates our authorization header for testing
@@ -238,7 +313,11 @@ module.exports = {
   makeUsersArray,
   makeProjectsArray,
   makeTasksArray,
+  makeSettingsArray,
+  makeHydrationsArray,
   makeExpectedProject,
   makeExpectedTask,
+  makeExpectedSetting,
+  makeExpectedHydration,
   makeMaliciousProject
 };

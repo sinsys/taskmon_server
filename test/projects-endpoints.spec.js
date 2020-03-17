@@ -9,7 +9,9 @@ describe(`Projects Endpoints`, () => {
   const {
     testUsers,
     testProjects,
-    testTasks
+    testTasks,
+    testSettings,
+    testHydrations
   } = helpers.makeFixtures();
 
   before('connect to database', () => {
@@ -42,6 +44,8 @@ describe(`Projects Endpoints`, () => {
             db,
             testUsers,
             [],
+            [],
+            [],
             []
           )
         );
@@ -65,7 +69,9 @@ describe(`Projects Endpoints`, () => {
           db,
           testUsers,
           testProjects,
-          testTasks
+          testTasks,
+          [],
+          []
         )
       );
       it(`Responds with 200 with an array of projects`, () => {
@@ -99,6 +105,8 @@ describe(`Projects Endpoints`, () => {
           db,
           testUsers,
           [],
+          [],
+          [],
           []
         )
       );
@@ -123,7 +131,9 @@ describe(`Projects Endpoints`, () => {
           db,
           testUsers,
           testProjects,
-          testTasks
+          testTasks,
+          [],
+          []
         )
       );
 
@@ -151,6 +161,8 @@ describe(`Projects Endpoints`, () => {
           helpers.seedTables(
             db,
             testUsers,
+            [],
+            [],
             [],
             []
           )
@@ -196,6 +208,8 @@ describe(`Projects Endpoints`, () => {
             db,
             testUsers,
             [],
+            [],
+            [],
             []
           )
         );
@@ -223,7 +237,9 @@ describe(`Projects Endpoints`, () => {
             db,
             testUsers,
             testProjects,
-            testTasks
+            testTasks,
+            [],
+            []
           )
         );
       });
@@ -261,6 +277,8 @@ describe(`Projects Endpoints`, () => {
             db,
             testUsers,
             [],
+            [],
+            [],
             []
           )
         );
@@ -294,12 +312,14 @@ describe(`Projects Endpoints`, () => {
             db,
             testUsers,
             testProjects,
-            testTasks
+            testTasks,
+            [],
+            []
           )
         );
       });
       
-      it(`Responds with 204 and the project is updated`, function() {
+      it(`Responds with 200 and the project is updated`, function() {
         this.retries(3);
         const projectId = 1;
         const updatedProject = {

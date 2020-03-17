@@ -3,13 +3,14 @@ BEGIN;
 TRUNCATE
   users,
   tasks,
-  projects
+  projects,
+  settings,
+  hydration
   RESTART IDENTITY CASCADE;
 
 INSERT INTO users (user_name, nickname, password)
 VALUES
-  ('dunder@dunder.com', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m'), 
-  ('admin@admin.com', 'admin', '$2a$10$jHOVsme0Zr6SC6fQ/pX9lubfK/Ptc7O.lp.DKpHDuETeBTkf3nll.');
+  ('dunder@dunder.com', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m');
 
 INSERT INTO projects (title, content, user_id, date_due)
 VALUES
@@ -23,5 +24,14 @@ VALUES
   ('Third Example Task Title', 'This is a description of a sample task. It is due when the project is due', 1, 1, (NOW() + interval '2 days 2 hours 30 minutes')),
   ('Fourth Example Task Title', 'This is a description of a sample task. It is assigned to the long due-date project', 1, 2, (NOW() + interval '10 days 2 hours 11 minutes')),
   ('Fifth Task Title', 'This task is not assigned to a project.', 1, null, (NOW() + interval '3 days 12 hours 10 minutes'));
+
+INSERT INTO settings (id, nickname, hydration)
+VALUES
+  (1, 'Test user', true);
+
+INSERT INTO hydration (length, start_time, end_time, user_id)
+VALUES
+  (3600000, NOW(), (NOW() + interval '2 hours'), 1),
+  (3600000, NOW(), (NOW() + interval '2 hours'), 1);
 
 COMMIT;
