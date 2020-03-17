@@ -25,9 +25,9 @@ VALUES
   ('Fourth Example Task Title', 'This is a description of a sample task. It is assigned to the long due-date project', 1, 2, (NOW() + interval '10 days 2 hours 11 minutes')),
   ('Fifth Task Title', 'This task is not assigned to a project.', 1, null, (NOW() + interval '3 days 12 hours 10 minutes'));
 
-INSERT INTO settings (id, nickname, hydration)
+INSERT INTO settings (id, user_id, nickname, hydration)
 VALUES
-  (1, 'Test user', true);
+  (1, 1, 'Test user', true);
 
 INSERT INTO hydration (length, start_time, end_time, user_id)
 VALUES

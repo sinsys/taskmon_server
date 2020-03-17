@@ -29,15 +29,13 @@ settingsRouter
       nickname,
       hydration
     } = req.body;
-    const settingsToUpdate = {
-      nickname,
-      hydration
+    const settingsToUpdate = {};
+    if ( nickname ) {
+      settingsToUpdate.nickname = nickname;
     };
-    for (const [key, value] of Object.entries(settingsToUpdate))
-      if (value == null)
-        return res.status(400).json({
-          error: `Missing '${key}' in request body`
-        });
+    if ( hydration !== undefined ) {
+      settingsToUpdate.hydration = hydration;
+    };
     SettingsService.updateSettings(
       knexInst,
       req.user.id,
@@ -47,7 +45,7 @@ settingsRouter
         res
           .status(200)
           .location(path.posix.join(req.originalUrl))
-          .json(SettingsService.serializeSettings(settings))
+          .json(SettingsService.serializeSettings(settingsToUpdate))
       })
       .catch(next);
     });

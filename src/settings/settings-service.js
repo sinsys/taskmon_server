@@ -19,6 +19,7 @@ const SettingsService = {
   },
 
   updateSettings: (db, user_id, updatedSettings) => {
+    console.log(updatedSettings);
     return (
       db('settings')
         .where('settings.user_id', user_id)
