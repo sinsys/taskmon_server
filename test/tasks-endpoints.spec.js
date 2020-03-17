@@ -41,6 +41,8 @@ describe(`Tasks Endpoints`, () => {
           db,
           testUsers,
           [],
+          [],
+          [],
           []
         )
       );
@@ -63,7 +65,9 @@ describe(`Tasks Endpoints`, () => {
           db,
           testUsers,
           testProjects,
-          testTasks
+          testTasks,
+          [],
+          []
         )
       );
 
@@ -98,6 +102,8 @@ describe(`Tasks Endpoints`, () => {
           db,
           testUsers,
           [],
+          [],
+          [],
           []
         )
       );
@@ -122,7 +128,9 @@ describe(`Tasks Endpoints`, () => {
           db,
           testUsers,
           testProjects,
-          testTasks
+          testTasks,
+          [],
+          []
         )
       );
 
@@ -150,6 +158,8 @@ describe(`Tasks Endpoints`, () => {
           helpers.seedTables(
             db,
             testUsers,
+            [],
+            [],
             [],
             []
           )
@@ -195,6 +205,8 @@ describe(`Tasks Endpoints`, () => {
             db,
             testUsers,
             [],
+            [],
+            [],
             []
           )
         );
@@ -222,7 +234,9 @@ describe(`Tasks Endpoints`, () => {
             db,
             testUsers,
             testProjects,
-            testTasks
+            testTasks,
+            [],
+            []
           )
         );
       });
@@ -260,6 +274,8 @@ describe(`Tasks Endpoints`, () => {
             db,
             testUsers,
             [],
+            [],
+            [],
             []
           )
         );
@@ -293,7 +309,9 @@ describe(`Tasks Endpoints`, () => {
             db,
             testUsers,
             testProjects,
-            testTasks
+            testTasks,
+            [],
+            []
           )
         );
       });

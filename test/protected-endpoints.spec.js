@@ -38,6 +38,8 @@ describe('Protected endpoints', () => {
       testUsers,
       testProjects,
       testTasks,
+      [],
+      []
     )
   );
 
@@ -92,6 +94,16 @@ describe('Protected endpoints', () => {
       path: `/api/tasks/:id`,
       method: supertest(app).delete
     },
+    {
+      name: `GET /api/settings`,
+      path: `/api/settings`,
+      method: supertest(app).get
+    },
+    {
+      name: `PATCH /api/settings`,
+      path: `/api/settings`,
+      method: supertest(app).patch
+    }
   ];
 
   protectedEndpoints.forEach(endpoint => {
