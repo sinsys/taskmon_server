@@ -1,4 +1,4 @@
-# TaskMon - Task Monitor/Monster
+# TaskMon - Task Monitor
 
 ## Description
 
@@ -36,8 +36,37 @@ Complete the following steps to start a new project (NEW-PROJECT-NAME):
 
 ### Authentication:
   - POST `/api/login`
+   - Sample Response:
+```
+{
+  "authToken": `created auth token`
+}
+```
 ### Projects:
  - GET `/api/projects`
+   - Sample Response: 
+```
+[
+    {
+        "id": 1,
+        "title": "Example Project",
+        "content": "This is a sample project. It contains 3 tasks. It will be due soon!",
+        "date_modified": "2020-03-17T04:58:23.575Z",
+        "date_created": "2020-03-17T04:58:23.575Z",
+        "date_due": "2020-03-19T07:28:23.575Z",
+        "user_id": 1
+    },
+    {
+        "id": 2,
+        "title": "Long Due Date Project",
+        "content": "This one only contains one task. It can be ignored for now.",
+        "date_modified": "2020-03-17T04:58:23.575Z",
+        "date_created": "2020-03-17T04:58:23.575Z",
+        "date_due": "2020-04-08T00:10:23.575Z",
+        "user_id": 1
+    }
+]
+```
  - POST `/api/projects`
  - GET `/api/projects/:id`
  - PATCH `/api/projects/:id`
