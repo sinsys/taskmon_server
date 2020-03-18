@@ -14,7 +14,8 @@ const ProjectsService = {
           'project.date_modified',
           'project.date_created',
           'project.date_due',
-          'project.user_id'
+          'project.user_id',
+          'project.completed'
         )
         .where('project.user_id', user_id)
         .orderBy('project.date_due', 'asc')
@@ -32,7 +33,8 @@ const ProjectsService = {
           'project.date_modified',
           'project.date_created',
           'project.date_due',
-          'project.user_id'
+          'project.user_id',
+          'project.completed'
         )
         .where('project.id', id)
         .andWhere('project.user_id', user_id)
@@ -77,7 +79,8 @@ const ProjectsService = {
       date_modified: project.date_modified,
       date_created: project.date_created,
       date_due: project.date_due,
-      user_id: project.user_id
+      user_id: project.user_id,
+      completed: project.completed
     };
   }
   

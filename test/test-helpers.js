@@ -56,7 +56,8 @@ makeProjectsArray = (users) => {
       date_modified: new Date('2020-01-22T16:28:32.615Z'),
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
-      user_id: users[0].id
+      user_id: users[0].id,
+      completed: false
     },
     {
       id: 2,
@@ -65,7 +66,8 @@ makeProjectsArray = (users) => {
       date_modified: new Date('2020-01-22T16:28:32.615Z'),
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
-      user_id: users[0].id
+      user_id: users[0].id,
+      completed: false
     },
     {
       id: 3,
@@ -74,7 +76,8 @@ makeProjectsArray = (users) => {
       date_modified: new Date('2020-01-22T16:28:32.615Z'),
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
-      user_id: users[1].id
+      user_id: users[1].id,
+      completed: false
     }
   ];
 };
@@ -90,7 +93,8 @@ makeTasksArray = (users, projects) => {
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
       user_id: users[0].id,
-      project_id: projects[0].id
+      project_id: projects[0].id,
+      completed: false
     },
     {
       id: 2,
@@ -100,7 +104,8 @@ makeTasksArray = (users, projects) => {
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
       user_id: users[0].id,
-      project_id: null
+      project_id: null,
+      completed: false
     },
     {
       id: 3,
@@ -110,7 +115,8 @@ makeTasksArray = (users, projects) => {
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
       user_id: users[1].id,
-      project_id: projects[1].id
+      project_id: projects[1].id,
+      completed: false
     },
     {
       id: 4,
@@ -120,7 +126,8 @@ makeTasksArray = (users, projects) => {
       date_created: new Date('2020-01-22T16:28:32.615Z'),
       date_due: new Date('2020-05-22T16:28:32.615Z'),
       user_id: users[1].id,
-      project_id: null
+      project_id: null,
+      completed: false
     }
   ];
 };
@@ -222,7 +229,8 @@ makeExpectedProject = (project) => {
     date_modified: project.date_modified.toISOString(),
     date_created: project.date_created.toISOString(),
     date_due: project.date_due.toISOString(),
-    user_id: project.user_id
+    user_id: project.user_id,
+    completed: project.completed
   }
 };
 
@@ -235,7 +243,8 @@ makeExpectedTask = (task) => {
     date_created: task.date_created.toISOString(),
     date_due: task.date_due.toISOString(),
     user_id: task.user_id,
-    project_id: task.project_id
+    project_id: task.project_id,
+    completed: task.completed
   }
 };
 
@@ -266,10 +275,11 @@ makeMaliciousProject = (user) => {
     date_created: new Date(),
     date_modified: new Date(),
     date_due: new Date(),
-    user_id: user.id
+    user_id: user.id,
+    completed: false
   }
   const expectedProject = {
-    ...makeExpectedArticle([user], maliciousProject),
+    ...makeExpectedProject([user], maliciousProject),
     title: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
     content: `Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`,
   }

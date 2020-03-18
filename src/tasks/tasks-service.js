@@ -15,7 +15,8 @@ const TasksService = {
           'task.date_created',
           'task.date_due',
           'task.user_id',
-          'task.project_id'
+          'task.project_id',
+          'task.completed'
         )
         .where('task.user_id', user_id)
         .orderBy('task.date_due', 'asc')
@@ -34,7 +35,8 @@ const TasksService = {
           'task.date_created',
           'task.date_due',
           'task.user_id',
-          'task.project_id'
+          'task.project_id',
+          'task.completed'
         )
         .where('task.id', id)
         .andWhere('task.user_id', user_id)
@@ -81,7 +83,8 @@ const TasksService = {
       date_created: task.date_created,
       date_due: task.date_due,
       user_id: task.user_id,
-      project_id: task.project_id
+      project_id: task.project_id,
+      completed: task.completed
     };
   }
   
