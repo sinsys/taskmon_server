@@ -93,22 +93,19 @@ projectsRouter
     const { 
       title,
       content,
-      date_due
+      date_due,
+      completed
     } = req.body;
     const projectToUpdate = { 
       title,
+      content,
       date_due,
-      date_modified: new Date()
+      date_modified: new Date(),
+      completed
     };
     for (const [key, value] of Object.entries(projectToUpdate))
       if (value == null)
-        return res.status(400).json({
-          error: `Missing '${key}' in request body`
-        });
-
-    if ( content ) {
-      projectToUpdate.content = content;
-    };
+        delete projectToUpdate[key]
 
     ProjectsService.updateProject(
       knexInst,

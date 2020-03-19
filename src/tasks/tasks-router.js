@@ -26,7 +26,7 @@ tasksRouter
       .catch(next)
   })
   .post(jsonBodyParser, (req, res, next) => {
-    const { title, content, date_due } = req.body;
+    const { title, content, project_id, date_due } = req.body;
     const newTask = { title, date_due };
 
     for (const [key, value] of Object.entries(newTask))
@@ -39,6 +39,9 @@ tasksRouter
       newTask.content = req.body.content;
     };
 
+    if( project_id ) {
+      newTask.project_id = req.body.project_id;
+    }
     newTask.user_id = req.user.id;
     TasksService.addTask(
       req.app.get('db'),
