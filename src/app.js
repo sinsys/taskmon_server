@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config');
+const { NODE_ENV, CLIENT_ORIGIN } = require('./config');
 
 const app = express();
 const projectsRouter = require('./projects/projects-router');
@@ -18,7 +18,9 @@ app.use(
     morganOpt,
     { skip: () => NODE_ENV === 'test' }
   ),
-  cors(),
+  cors({
+    origin: CLIENT_ORIGIN
+  }),
   helmet()
 );
 
