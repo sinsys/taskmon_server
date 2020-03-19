@@ -316,7 +316,7 @@ describe(`Tasks Endpoints`, () => {
         );
       });
       
-      it(`Responds with 204 and the task is updated`, function() {
+      it(`Responds with 201 and the task is updated`, function() {
         this.retries(3);
         const taskId = 1;
         const updatedTask = {

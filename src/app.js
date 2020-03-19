@@ -9,6 +9,7 @@ const projectsRouter = require('./projects/projects-router');
 const tasksRouter = require('./tasks/tasks-router');
 const authRouter = require('./auth/auth-router');
 const settingsRouter = require('./settings/settings-router');
+const usersRouter = require('./users/users-router');
 
 const morganOpt = 
 (NODE_ENV === 'production') ? 'tiny' : 'common';
@@ -34,6 +35,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/projects', projectsRouter);
 app.use('/api/tasks', tasksRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/users', usersRouter);
 
 errorHandler = (err, req, res, next) => {
   let response;

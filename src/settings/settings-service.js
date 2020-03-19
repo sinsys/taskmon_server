@@ -32,64 +32,19 @@ const SettingsService = {
       ...settings,
       nickname: xss(settings.nickname)
     };
+  },
+
+  addSettings: (db, newSettings, user_id) => {
+    return (
+      db
+        .insert(newSettings)
+        .into('settings')
+        .returning('*')
+        .then(([settings]) => settings)
+    );
   }
+
   
 };
 
 module.exports = SettingsService;
-
-//   (1, 'Test user', true);
-
-// INSERT INTO hydration (length, start_time, end_time, user_id)
-// VALUES
-//   (3600000, NOW(), (NOW() + interval '2 hours'), 1),
-//   (3600000, NOW(), (NOW() + interval '2 hours'), 1);
-
-  // getProjectById: (db, id, user_id) => {
-  //   return (
-  //     db
-  //       .from('projects AS project')
-  //       .select(
-  //         'project.id',
-  //         'project.title',
-  //         'project.content',
-  //         'project.date_modified',
-  //         'project.date_created',
-  //         'project.date_due',
-  //         'project.user_id'
-  //       )
-  //       .where('project.id', id)
-  //       .andWhere('project.user_id', user_id)
-  //       .first()
-  //   );
-  // },
-
-  // addProject: (db, newProject, user_id) => {
-  //   return (
-  //     db
-  //       .insert(newProject)
-  //       .into('projects')
-  //       .returning('*')
-  //       .then(([project]) => project)
-  //       .then(project =>
-  //         ProjectsService.getProjectById(db, project.id, user_id)
-  //       )
-  //   );
-  // },
-
-  // deleteProject: (db, id) => {
-  //   return (
-  //     db('projects')
-  //       .where( { id } )
-  //       .delete()
-  //   );
-  // },
-
-  // updateProject: (db, id, updatedProject) => {
-  //   return (
-  //     db('projects')
-  //       .where( { id } )
-  //       .update(updatedProject)
-  //   );
-  // },
-  // Serialize settings
