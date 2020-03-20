@@ -34,7 +34,7 @@ const SettingsService = {
     };
   },
 
-  addSettings: (db, newSettings, user_id) => {
+  addSettings: (db, newSettings) => {
     return (
       db
         .insert(newSettings)
@@ -44,7 +44,6 @@ const SettingsService = {
     );
   }
 
-  
 };
 
 module.exports = SettingsService;

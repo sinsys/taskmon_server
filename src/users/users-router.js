@@ -40,7 +40,7 @@ usersRouter
 
     UsersService.hasUserWithUserName(
       req.app.get('db'),
-      user_name
+      user_name.toLowerCase()
     )
       .then(hasUserWithUserName => {
         if( hasUserWithUserName ) {
@@ -58,7 +58,7 @@ usersRouter
             .then(hashedPassword => {
 
               const newUser = {
-                user_name,
+                user_name: user_name.toLowerCase(),
                 password: hashedPassword,
                 date_created: 'now()'
               };
@@ -74,8 +74,7 @@ usersRouter
                   };
                   SettingsService.addSettings(
                     req.app.get('db'),
-                    newSettings,
-                    user.id
+                    newSettings
                   )
                     .then(() => {
                       res

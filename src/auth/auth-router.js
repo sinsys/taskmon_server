@@ -24,7 +24,7 @@ authRouter
 
     AuthService.getUser(
       req.app.get('db'),
-      loginUser.user_name
+      loginUser.user_name.toLowerCase()
     )
       .then(dbUser => {
         if ( !dbUser ) {

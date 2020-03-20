@@ -8,9 +8,9 @@ TRUNCATE
   hydration
   RESTART IDENTITY CASCADE;
 
-INSERT INTO users (user_name, nickname, password)
+INSERT INTO users (user_name, password)
 VALUES
-  ('dunder@dunder.com', 'Dunder Mifflin', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m');
+  ('dunder@dunder.com', '$2a$10$vIiAEYVkomqB9JdsD4jZC.ibcXNBC9PwQ3cqWftVuY3SIW9adyH6m');
 
 INSERT INTO projects (title, content, user_id, date_due)
 VALUES
@@ -25,9 +25,9 @@ VALUES
   ('Fourth Example Task Title', 'This is a description of a sample task. It is assigned to the long due-date project', 1, 2, (NOW() + interval '10 days 2 hours 11 minutes')),
   ('Fifth Task Title', 'This task is not assigned to a project.', 1, null, (NOW() + interval '3 days 12 hours 10 minutes'));
 
-INSERT INTO settings (id, user_id, nickname, hydration)
+INSERT INTO settings (user_id, nickname, hydration)
 VALUES
-  (1, 1, 'Test user', true);
+  (1, 'Test user', true);
 
 INSERT INTO hydration (length, start_time, end_time, user_id)
 VALUES
