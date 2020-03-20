@@ -95,6 +95,7 @@ tasksRouter
     const { 
       title,
       content,
+      project_id,
       date_due,
       completed
     } = req.body;
@@ -102,13 +103,18 @@ tasksRouter
       title,
       content,
       date_due,
+      project_id,
       date_modified: new Date(),
       completed
     };
     for (const [key, value] of Object.entries(taskToUpdate))
       if (value == null)
         delete taskToUpdate[key]
-
+    // Adding property back to null if it isn't supplied.
+    if ( !taskToUpdate.project_id ) {
+      taskToUpdate.project_id = null;
+    }
+    
     TasksService.updateTask(
       knexInst,
       req.params.id,
