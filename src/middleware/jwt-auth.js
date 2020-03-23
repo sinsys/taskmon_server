@@ -1,3 +1,4 @@
+// Middleware - JWT Authentication
 const AuthService = require('../auth/auth-service');
 
 requireAuth = (req, res, next) => {
@@ -13,6 +14,7 @@ requireAuth = (req, res, next) => {
         })
     );
   } else {
+    // We slice off the 'bearer ' portion of the token
     bearerToken = authToken.slice(7, authToken.length)
   };
 

@@ -1,14 +1,15 @@
+// Router - users
 const { Router, json } = require('express');
 const usersRouter = Router();
 const jsonBodyParser = json();
 const path = require('path');
 
+// Services
 const UsersService = require('./users-service');
 const SettingsService = require('../settings/settings-service');
 
 usersRouter
   .post('/', jsonBodyParser, (req, res, next) => {
-
     const { 
       password, 
       user_name,

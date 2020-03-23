@@ -1,6 +1,10 @@
+// Service - Authentication
+// Configuration
+const config = require('../config');
+
+// Utilities
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
 
 const AuthService = {
 

@@ -1,11 +1,14 @@
+// Router - settings
 const { Router, json } = require('express');
-const path = require('path')
-const SettingsService = require('./settings-service');
-const { requireAuth } = require('../middleware/jwt-auth');
-
-const jsonBodyParser = json();
-
 const settingsRouter = Router();
+const jsonBodyParser = json();
+const path = require('path');
+
+// Services
+const SettingsService = require('./settings-service');
+
+// Middleware
+const { requireAuth } = require('../middleware/jwt-auth');
 
 settingsRouter
   .route('/')

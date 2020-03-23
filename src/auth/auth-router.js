@@ -1,7 +1,9 @@
+// Router - Authentication
 const { Router, json } = require('express');
 const authRouter = Router();
 const jsonBodyParser = json();
 
+// Services
 const AuthService = require('./auth-service');
 
 authRouter
@@ -10,6 +12,7 @@ authRouter
     const { user_name, password } = req.body;
     const loginUser = { user_name, password };
 
+    // Verifies both user_name and password exist
     for ( const [key, value] of Object.entries(loginUser) ) {
       if ( value == null ) {
         return (

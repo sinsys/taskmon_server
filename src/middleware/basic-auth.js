@@ -1,3 +1,5 @@
+// No longer used in the app - Using jwt authentication instead
+// Keeping file for backup and reference for basic authentication
 const AuthService = require('../auth/auth-service');
 
 const requireAuth = (req, res, next) => {

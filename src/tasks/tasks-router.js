@@ -1,11 +1,14 @@
+// Router - tasks
 const { Router, json } = require('express');
-const path = require('path');
-const TasksService = require('./tasks-service');
-const { requireAuth } = require('../middleware/jwt-auth');
-
-const jsonBodyParser = json();
-
 const tasksRouter = Router();
+const jsonBodyParser = json();
+const path = require('path');
+
+// Services
+const TasksService = require('./tasks-service');
+
+// Middleware
+const { requireAuth } = require('../middleware/jwt-auth');
 
 tasksRouter
   .route('/')
